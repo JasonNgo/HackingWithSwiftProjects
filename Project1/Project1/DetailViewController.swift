@@ -40,6 +40,9 @@ class DetailViewController: UIViewController {
     title = selectedImage
     navigationItem.largeTitleDisplayMode = .never
     
+    let shareBarButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
+    navigationItem.rightBarButtonItem = shareBarButton
+    
     view.addSubview(photoImageView)
     NSLayoutConstraint.activate([
       photoImageView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -56,6 +59,12 @@ class DetailViewController: UIViewController {
   
   override var prefersHomeIndicatorAutoHidden: Bool {
     return navigationController?.hidesBarsOnTap ?? false
+  }
+  
+  @objc func shareTapped() {
+    let vc = UIActivityViewController(activityItems: [photoImageView.image!], applicationActivities: [])
+    vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+    present(vc, animated: true)
   }
   
 }
