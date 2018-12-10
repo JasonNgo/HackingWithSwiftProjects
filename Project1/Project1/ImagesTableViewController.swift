@@ -18,7 +18,12 @@ class ImagesTableViewController: UITableViewController {
     
     title = "Storm Viewer"
     navigationController?.navigationBar.prefersLargeTitles = true
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
     
+    addPicturesFromBundle()
+  }
+  
+  fileprivate func addPicturesFromBundle() {
     let fm = FileManager.default
     let path = Bundle.main.resourcePath!
     let items = try! fm.contentsOfDirectory(atPath: path)
@@ -28,9 +33,13 @@ class ImagesTableViewController: UITableViewController {
     }
     
     print(pictures)
-    
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
   }
+  
+}
+
+// MARK: - UITableViewDelegate
+
+extension ImagesTableViewController {
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return pictures.count
@@ -48,7 +57,7 @@ class ImagesTableViewController: UITableViewController {
     detailViewController.selectedImage = fileName
     navigationController?.pushViewController(detailViewController, animated: true)
   }
-
+  
 }
 
 

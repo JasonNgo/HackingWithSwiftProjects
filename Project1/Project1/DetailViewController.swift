@@ -10,6 +10,8 @@ import UIKit
 
 class DetailViewController: UIViewController {
   
+  // MARK: - Views
+  
   let photoImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.clipsToBounds = true
@@ -18,7 +20,10 @@ class DetailViewController: UIViewController {
     return imageView
   }()
   
+  /// Name of file to display
   var selectedImage: String?
+  
+  // MARK: - Overrides
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
