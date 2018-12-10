@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
   
+  // MARK: - Views
+  
   @IBOutlet weak var topCountryButton: UIButton!
   @IBOutlet weak var middleCountryButton: UIButton!
   @IBOutlet weak var bottomCountryButton: UIButton!
@@ -17,6 +19,8 @@ class ViewController: UIViewController {
   var countries: [String] = []
   var score = 0
   var correctAnswer = 0
+  
+  // MARK: - Override Functions
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -39,6 +43,8 @@ class ViewController: UIViewController {
     askQuestion()
   }
   
+  // MARK: - IBActions
+  
   @IBAction func buttonTapped(_ sender: UIButton) {
     if sender.tag == correctAnswer {
       title = "Correct".uppercased()
@@ -48,11 +54,10 @@ class ViewController: UIViewController {
       score -= 1
     }
     
-    let alertController = UIAlertController(title: title, message: "Your score is \(score)", preferredStyle: .alert)
-    let alertAction = UIAlertAction(title: "Continue", style: .default, handler: askQuestion)
-    alertController.addAction(alertAction)
-    present(alertController, animated: true)
+    displayAlertMessage()
   }
+  
+  // MARK: - Helper Functions
   
   fileprivate func askQuestion(action: UIAlertAction! = nil) {
     countries.shuffle()
@@ -64,7 +69,12 @@ class ViewController: UIViewController {
     bottomCountryButton.setImage(UIImage(named: countries[2]), for: .normal)
   }
   
-  
+  fileprivate func displayAlertMessage() {
+    let alertController = UIAlertController(title: title, message: "Your score is \(score)", preferredStyle: .alert)
+    let alertAction = UIAlertAction(title: "Continue", style: .default, handler: askQuestion)
+    alertController.addAction(alertAction)
+    present(alertController, animated: true)
+  }
   
 }
 
